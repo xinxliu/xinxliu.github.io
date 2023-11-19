@@ -1,0 +1,68 @@
+---
+layout: tec
+title: Introduction to Machine Learning
+permalink: intro.html
+categories: ML
+---
+
+### Chapter 1. 绪论
+
+#### 1.1 引言
+
+1. **机器学习** ：机器学习是这样一门学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常以“数据”的形式存在，因此，机器学习所研究的主要内容，是关于在计算机上从**数据产生“模型”(model)** 的**算法**，即**”学习算法“**(learning algorithm)。
+   1. >[Mitchell,1997] 假设用P来评估计算机程序在某任务类T上的性能，若一个程序利用经验E在T中任务上获得了性能改善，则我们就说**关于T和P，该程序对E进行了学习** 。
+
+   2. 可见对该程序的评价除了依赖于T之外，还依赖于评价P，即评价之评价。
+   3. model也被称为learner，学习器。
+
+2. 本书采用”模型“泛指从数据中学到的结果。有文献使用“模型“表示全局性的结果，比如一颗决策树；用”模式“表示局部性的结果。比如一条规则。
+
+
+#### 1.2 基本术语 
+
+1. **数据集(dataset)：**一组记录的集合，其中的每条记录是关于一个事件或对象的描述，称为一个**”实例“**(instance)或**”样本“**(sample)。可以对比理解成数据库中的一个元组。但与数据库不同的是，在本书中**一条记录用一个列向量表示**。。
+
+2. **属性**(attribute)或**“特征”**(feature): 反映事物或对象在某方面的表现或性质的事项。可以对比理解为数据库中的一个个的列。同样的在本书中，这些特征是用**一个一个行向量**表示的。
+
+3. **属性空间**(attribute space)或**样本空间**(sample space)：属性张成的空间。
+
+4. **特征向量**(feature vector)：在这个样本空间中的一点会对应一个坐标向量，我们称之为特征向量。一个实例对应于一个特征向量，且一般用列向量表示。
+
+5. 一般地，令$$D=\{ {\mathbf x_1},\mathbf{x_2} ,...,\mathbf{x_m}\}$$表示包含了m个实例的数据集，每个实例由d个属性描述，其中每个实例$$\mathbf{x_i} = (x_{i1};x_{i2};...;x_{id})$$是d维样本空间$$\mathcal{X}$$中的一个向量，$$\mathbf{x_i}\in\mathcal{X}$$ ，其中$$x_{ij}$$是$$\mathbf{x_i}$$在第j个属性上的取值，d称为样本$$\mathbf x_i$$的维数(dimensionality)。
+
+6. **学习**(learning)和**训练**(training)：从数据中学得模型的过程。
+   + 训练过程中使用的数据称为**“训练数据”**(training data)，其中每个样本称为一个“**训练样本**”(training sample/training data),训练样本组成的集合叫做“**训练集**”(training set)。
+   + 学得模型对应了关于数据的某种潜在的规律，因此亦被称为“**假设**”(hypothesis)
+   + 这种潜在规律本身被称为“**真相**”或"**真实**"(groundtruth)。
+   + 学习过程就是为了找出或者逼近真相。在这本书中，有时将模型称为**学习器**(learner)，可以看作学习算法在给定数据和参数空间上的实例化。
+
+7. sample vs example：当实例拥有了标记信息(label)后，成为”样例“(example)。可以用$$(\mathbf x_i,y_i)$$表示第i个样例，其中，$$y_i\in \mathcal{Y}$$是实例$$\mathbf x_i$$的标记，Y是所有标记的集合，亦称”标记空间“(label sapce)或”输出空间“。
+
+8. classification vs regression：如果我们想要预测的是离散值，这类学习任务称为”**分类**“(classification)；若要预测的是连续值，则称为”**回归**“(regression)。
+
+9. **测试**(testing)：学得其模型后，使用其进行预测的过程称为"**测试**"。被预测的样本成为”**测试样本**“(testing sample)。比如学到f后，对于测试例(testing instance，意思和testing sample相同)$$\mathbf x$$，可得到其预测标记$$y=f(\mathbf x)$$。
+
+10. **聚类**(clustering)：即将训练集中的training samples分为若干组，每组称为一个簇(cluster)；这些自动形成的簇可能对应一些潜在的概念划分。
+   + clustering有助于我们了解数据内在的规律，能为更深入地分析数据建立基础；
+   + clustering过程中，training samples不具有labels。
+
+11. 根据training data是否拥有label，学习任务可分为两类：
+   + **监督学习**(supervised learning)：拥有标记信息，classification和regression是其代表；
+
+   + **无监督学习**(unsupervised learning)：没有标记信息，clustering是其代表。
+
+12. **泛化**(generalization)能力：学得模型适用于新样本的能力称之为**泛化**能力。
+   + 机器学习的目标是使model具有强泛化能力。
+
+
+#### 1.3 假设空间 :kissing_smiling_eyes:
+
+1. **归纳**(induction)：从特殊到一般的泛化过程。从具体的事实归结出一般性的规律
+2. **演绎**(deduction)：从一般到特殊的特化(specialization)的过程
+3. **归纳学习**(inductive learning)：即从样例中学习，得到model的过程。
+   + 广义的归纳学习可以认为是和从样例中学习相当
+   + 狭义的归纳学习要求从训练数据中学得概念(concept)，所以狭义的归纳学习也被称为概念学习。其最基础的是布尔概念学习
+4. 可以将学习过程看作是一个在所有假设空间进行搜索的过程，搜索目标是和训练集匹配(fit)的假设。
+   + 搜索的方式有多种，可以自顶向下，也可以自顶向上；
+   + 操作也可以有不同，比如只保留与正例相符的假设或只删除与正例不相符的假设等；
+   + 实际问题中，假设空间相对于有限的样本数量而言是很大的，所以存在着一个与训练集一致的“假设集合”，我们称之为“版本空间”(version space)。
